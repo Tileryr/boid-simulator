@@ -1,48 +1,8 @@
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
-let boidNumber = 10
-let boidRadius = 10
-let boids = []
-
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
-
-class Boid {
-    constructor({position, velocity, alignRadius, separateRadius, angle}) {
-        this.position = position
-        this.velocity = velocity
-        this.alignRadius = alignRadius
-        this.separateRadius = separateRadius
-        this.angle = angle
-    }
-
-    draw() {
-        ctx.strokeStyle = 'white'
-        ctx.lineWidth = '3'
-
-        
-        this.angle = Math.atan2(this.velocity.y, this.velocity.x)
-        // console.log(this.velocity.y/this.velocity.x)
-        if (this.angle < 0) {this.angle+=Math.PI*2}
-        
-        var triangle = makeTriangle(this.position, boidRadius, this.angle)
-
-        ctx.beginPath();
-        ctx.moveTo(triangle.x1, triangle.y1);
-        ctx.lineTo(triangle.x2, triangle.y2);
-        ctx.lineTo(triangle.x3, triangle.y3);
-        ctx.lineTo(triangle.x1, triangle.y1);
-        ctx.closePath();
-        ctx.stroke();
-    }
-
-    update() {
-        this.draw()
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-    }
-}
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -58,7 +18,6 @@ function animate() {
 function makeTriangle(position, radius, rotation = 0) {
     // console.log(rotation)
     let number = (rotation/Math.PI)*3
-    console.log(number/3)
     let newTriangle = {
         //the first vertex is on the circumscribed circle at 0 radians where R is the radius of the circle ( R)
         //you may decide to change this.
@@ -93,17 +52,39 @@ function resizeWindow() {
 window.onresize = debounce(() => resizeWindow())
 
 window.onload = () => {
-    for (let index = 0; index < boidNumber; index++) {
-        boids[index] = new Boid({
-            position: {
-                x: Math.random()*canvas.width,
-                y: Math.random()*canvas.height
-            },
-            velocity: {
-                x: Math.random()*10-5,
-                y: Math.random()*10-5
-            }
-        })
-    }
+    boids[0] = new Boid({
+        position: {
+            x: canvas.width/2,
+            y: canvas.height
+        },
+        velocity: {
+            x: 0,
+            y: -3
+        }
+    })
+    boids[1] = new Boid({
+        position: {
+            x: canvas.width/2,
+            y: 0
+        },
+        velocity: {
+            x: 0,
+            y: 3
+        }
+    })
+    // for (let index = 0; index < boidNumber; index++) {
+    //     boids[index] = new Boid({
+    //         position: {
+    //             x: Math.random()*canvas.width,
+    //             y: Math.random()*canvas.height
+    //         },
+    //         velocity: {
+    //             x: Math.random()*10-5,
+    //             y: Math.random()*10-5
+    //             // x: Math.random()*10-5,
+    //             // y: Math.random()*10-5
+    //         }
+    //     })
+    // }
     animate()
 }
