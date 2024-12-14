@@ -1,9 +1,20 @@
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d')
+
 let boidNumber = 10
 let boidRadius = 10
 let boids = []
 
 let boidSeperationRadius = 40
 let boidAvoidanceFactor = 0.01
+
+let margin = 50
+let leftMargin = margin
+let topMargin = margin
+let rightMargin = canvas.width-margin
+let bottomMargin = canvas.height-margin
+let turnFactor = 0.1
+
 function isInCircle(radius, center, position) {
     return Math.hypot(center.x-position.x, center.y-position.y) < radius ? true : false
 }
@@ -42,6 +53,7 @@ class Boid {
 
     update() {
         this.draw()
+        //SEPERATION
         let close_dx = 0
         let close_dy = 0
         boids.forEach(boid => {
@@ -55,6 +67,16 @@ class Boid {
         console.log(close_dy)
         this.velocity.x += close_dx*boidAvoidanceFactor
         this.velocity.y += close_dy*boidAvoidanceFactor
+
+        //EDGE AVOIDANCE
+        if (this.position.x < leftMargin) {
+            this.velocity.x += turnFactor }
+        if (this.position.x > rightMargin) {
+            this.velocity.x -= turnFactor }
+        if (this.position.y < topMargin) {
+            this.velocity.y += turnFactor}
+        if (this.position.y > bottomMargin) {
+            this.velocity.y -= turnFactor }
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y

@@ -1,6 +1,3 @@
-const canvas = document.querySelector('canvas')
-const ctx = canvas.getContext('2d')
-
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -47,6 +44,8 @@ function debounce(func, timeout = 300) {
 function resizeWindow() {
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight  
+    rightMargin = canvas.width-margin
+    bottomMargin = canvas.height-margin
 }
 
 window.onresize = debounce(() => resizeWindow())
@@ -86,5 +85,7 @@ window.onload = () => {
             }
         })
     }
+    rightMargin = canvas.width-margin
+    bottomMargin = canvas.height-margin
     animate()
 }
