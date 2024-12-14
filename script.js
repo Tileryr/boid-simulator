@@ -52,39 +52,39 @@ function resizeWindow() {
 window.onresize = debounce(() => resizeWindow())
 
 window.onload = () => {
-    boids[0] = new Boid({
-        position: {
-            x: canvas.width/2,
-            y: canvas.height
-        },
-        velocity: {
-            x: 0,
-            y: -3
-        }
-    })
-    boids[1] = new Boid({
-        position: {
-            x: canvas.width/2,
-            y: 0
-        },
-        velocity: {
-            x: 0,
-            y: 3
-        }
-    })
-    // for (let index = 0; index < boidNumber; index++) {
-    //     boids[index] = new Boid({
-    //         position: {
-    //             x: Math.random()*canvas.width,
-    //             y: Math.random()*canvas.height
-    //         },
-    //         velocity: {
-    //             x: Math.random()*10-5,
-    //             y: Math.random()*10-5
-    //             // x: Math.random()*10-5,
-    //             // y: Math.random()*10-5
-    //         }
-    //     })
-    // }
+    // boids[0] = new Boid({
+    //     position: {
+    //         x: canvas.width/2 - 10,
+    //         y: canvas.height
+    //     },
+    //     velocity: {
+    //         x: 0,
+    //         y: -3
+    //     }
+    // })
+    // boids[1] = new Boid({
+    //     position: {
+    //         x: canvas.width/2 + 10,
+    //         y: 0
+    //     },
+    //     velocity: {
+    //         x: 0,
+    //         y: 3
+    //     }
+    // })
+    for (let index = 0; index < boidNumber; index++) {
+        boids[index] = new Boid({
+            position: {
+                x: Math.random()*canvas.width,
+                y: Math.random()*canvas.height
+            },
+            velocity: {
+                x: Math.random()*10-5,
+                y: Math.random()*10-5
+                // x: Math.random()*10-5,
+                // y: Math.random()*10-5
+            }
+        })
+    }
     animate()
 }

@@ -2,8 +2,8 @@ let boidNumber = 10
 let boidRadius = 10
 let boids = []
 
-let boidSeperationRadius = 30
-let boidAvoidanceFactor = 10
+let boidSeperationRadius = 40
+let boidAvoidanceFactor = 0.01
 function isInCircle(radius, center, position) {
     return Math.hypot(center.x-position.x, center.y-position.y) < radius ? true : false
 }
@@ -52,6 +52,7 @@ class Boid {
                 close_dy += this.position.y - boid.position.y
             }
         });
+        console.log(close_dy)
         this.velocity.x += close_dx*boidAvoidanceFactor
         this.velocity.y += close_dy*boidAvoidanceFactor
 
