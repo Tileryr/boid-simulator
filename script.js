@@ -1,4 +1,5 @@
-const inputs = document.querySelectorAll('input');
+const factorDiv = document.querySelector('.factors')
+const factorInputs = factorDiv.querySelectorAll('input');
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -28,20 +29,14 @@ function resizeWindow() {
     bottomMargin = canvas.height-margin
 }
 
-function variableUpdate() {
-    console.log(window["boidNumber"])
-    window[this.name] = this.value
-    console.log(boidNumber)
+function updateVariable() {
+    tunableVariables[this.name] = this.value
 }
 
-function changeBoidNumber(number) {
-    boidNumber = number
-    boids = boids.slice(0, number)
-    addBoids(boids.length, boidNumber)
-}
-
-function addBoids(start, end) {
-    for (let index = start; index <= end; index++) {
+function changeBoidAmount(amount) {
+    boidNumber = amount
+    boids = boids.slice(0, amount)
+    for (let index = boids.length; index <= amount; index++) {
         boids[index] = new Boid({
             position: {
                 x: Math.random()*canvas.width,
@@ -50,8 +45,6 @@ function addBoids(start, end) {
             velocity: {
                 x: Math.random()*10-5,
                 y: Math.random()*10-5
-                // x: Math.random()*10-5,
-                // y: Math.random()*10-5
             }
         })
     }
@@ -62,11 +55,11 @@ window.onload = () => {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
     
-    addBoids(0, boidNumber)
+    changeBoidAmount(boidNumber)
 
     rightMargin = canvas.width-margin
     bottomMargin = canvas.height-margin
     animate()
 }
 
-// inputs.forEach(input => input.addEventListener('change', variableUpdate));
+factorInputs.forEach(input => input.addEventListener('change', updateVariable));

@@ -66,13 +66,15 @@ class Boid {
     }
 
     draw() {
-        ctx.strokeStyle = 'white'
-        ctx.lineWidth = '3'
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'
+        ctx.lineWidth = '1'
 
-        // ctx.beginPath()
-        // ctx.arc(this.position.x, this.position.y, boidSeperationRadius, 0, 2*Math.PI);
-        // ctx.arc(this.position.x, this.position.y, boidSightRadius, 0, 2*Math.PI);
-        // ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(this.position.x, this.position.y, tunableVariables.boidSeperationRadius, 0, 2*Math.PI);
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(this.position.x, this.position.y, tunableVariables.boidSightRadius, 0, 2*Math.PI);
+        ctx.stroke()
 
         this.angle = Math.atan2(this.velocity.y, this.velocity.x)
         // console.log(this.velocity.y/this.velocity.x)
@@ -80,6 +82,8 @@ class Boid {
         
         var triangle = makeTriangle(this.position, boidRadius, this.angle)
 
+        ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
+        ctx.lineWidth = '3'
         ctx.beginPath();
         ctx.moveTo(triangle.x1, triangle.y1);
         ctx.lineTo(triangle.x2, triangle.y2);
