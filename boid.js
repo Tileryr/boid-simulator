@@ -8,12 +8,15 @@ let boids = []
 let boidSeperationRadius = 40
 let boidAvoidanceFactor = 0.01
 
+let boidSightRadius = 80
+let matchingFactor = 0.01
+
 let margin = 50
 let leftMargin = margin
 let topMargin = margin
 let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
-let turnFactor = 0.1
+let turnFactor = 0.2
 
 function isInCircle(radius, center, position) {
     return Math.hypot(center.x-position.x, center.y-position.y) < radius ? true : false
@@ -34,6 +37,7 @@ class Boid {
 
         ctx.beginPath()
         ctx.arc(this.position.x, this.position.y, boidSeperationRadius, 0, 2*Math.PI);
+        ctx.arc(this.position.x, this.position.y, boidSightRadius, 0, 2*Math.PI);
         ctx.stroke()
 
         this.angle = Math.atan2(this.velocity.y, this.velocity.x)
@@ -53,21 +57,41 @@ class Boid {
 
     update() {
         this.draw()
-        //SEPERATION
-        let close_dx = 0
-        let close_dy = 0
+        
+        let boidDistancesX = 0
+        let boidDistancesY = 0
+
+        let boidVelocityAverageX = 0
+        let boidVelocityAverageY = 0
+        let boidsInSight = 0
+
         boids.forEach(boid => {
             if(boid === this) {return}
+
+            if(isInCircle(boidSightRadius, this.position, boid.position)) {
+                boidVelocityAverageX += boid.velocity.x
+                boidVelocityAverageY += boid.velocity.y
+                boidsInSight += 1
+            }
+
             if(isInCircle(boidSeperationRadius, this.position, boid.position)) {
-                console.log("what")
-                close_dx += this.position.x - boid.position.x
-                close_dy += this.position.y - boid.position.y
+                boidDistancesX += this.position.x - boid.position.x
+                boidDistancesY += this.position.y - boid.position.y
             }
         });
-        console.log(close_dy)
-        this.velocity.x += close_dx*boidAvoidanceFactor
-        this.velocity.y += close_dy*boidAvoidanceFactor
 
+        //SEPERATION
+        this.velocity.x += boidDistancesX*boidAvoidanceFactor
+        this.velocity.y += boidDistancesY*boidAvoidanceFactor
+
+        //ALIGNMENT
+        if(boidsInSight > 0) {
+            boidVelocityAverageX = boidVelocityAverageX/boidsInSight
+            boidVelocityAverageY = boidVelocityAverageY/boidsInSight
+
+            this.velocity.x += (boidVelocityAverageX - this.velocity.x)*matchingFactor
+            this.velocity.y += (boidVelocityAverageY - this.velocity.y)*matchingFactor
+        }
         //EDGE AVOIDANCE
         if (this.position.x < leftMargin) {
             this.velocity.x += turnFactor }
