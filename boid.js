@@ -10,6 +10,7 @@ let boidAvoidanceFactor = 0.01
 
 let boidSightRadius = 80
 let matchingFactor = 0.01
+let centeringFactor = 0.00005
 
 let margin = 50
 let leftMargin = margin
@@ -66,6 +67,10 @@ class Boid {
 
         let boidVelocityAverageX = 0
         let boidVelocityAverageY = 0
+
+        let boidPositionAverageX = 0
+        let boidPositionAverageY = 0
+
         let boidsInSight = 0
 
         boids.forEach(boid => {
@@ -74,6 +79,10 @@ class Boid {
             if(isInCircle(boidSightRadius, this.position, boid.position)) {
                 boidVelocityAverageX += boid.velocity.x
                 boidVelocityAverageY += boid.velocity.y
+
+                boidPositionAverageX += boid.position.x
+                boidPositionAverageY += boid.position.y
+
                 boidsInSight += 1
             }
 
@@ -92,9 +101,16 @@ class Boid {
             boidVelocityAverageX = boidVelocityAverageX/boidsInSight
             boidVelocityAverageY = boidVelocityAverageY/boidsInSight
 
+            boidPositionAverageX = boidPositionAverageX/boidsInSight
+            boidPositionAverageY = boidPositionAverageY/boidsInSight
+
             this.velocity.x += (boidVelocityAverageX - this.velocity.x)*matchingFactor
             this.velocity.y += (boidVelocityAverageY - this.velocity.y)*matchingFactor
+
+            this.velocity.x += (boidPositionAverageX - this.position.x)*centeringFactor
+            this.velocity.y += (boidPositionAverageY - this.position.y)*centeringFactor
         }
+    
         //EDGE AVOIDANCE
         if (this.position.x < leftMargin) {
             this.velocity.x += turnFactor }
