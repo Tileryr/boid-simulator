@@ -18,6 +18,9 @@ let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
 let turnFactor = 0.2
 
+let boidMinSpeed = 4
+let boidMaxSpeed = 6
+
 function isInCircle(radius, center, position) {
     return Math.hypot(center.x-position.x, center.y-position.y) < radius ? true : false
 }
@@ -101,7 +104,18 @@ class Boid {
             this.velocity.y += turnFactor}
         if (this.position.y > bottomMargin) {
             this.velocity.y -= turnFactor }
-
+        
+        //MIN AND MAX SPEEDS
+        let boidSpeed = Math.hypot(this.velocity.x, this.velocity.y)
+        if(boidSpeed < boidMinSpeed) {
+            this.velocity.x = (this.velocity.x/boidSpeed)*boidMinSpeed
+            this.velocity.y = (this.velocity.y/boidSpeed)*boidMinSpeed
+        } 
+        if(boidSpeed > boidMaxSpeed) {
+            this.velocity.x = (this.velocity.x/boidSpeed)*boidMaxSpeed
+            this.velocity.y = (this.velocity.y/boidSpeed)*boidMaxSpeed
+        } 
+        //UPDATE
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
     }
