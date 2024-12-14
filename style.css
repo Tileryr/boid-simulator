@@ -2,3 +2,16 @@ html, body {
     margin: 0;
     height: 100vh;
 }
+
+canvas {
+    position: absolute;
+}
+
+.tabs {
+    display: flex;
+    position: absolute;
+}
+
+.tab {
+    background-color: white;
+}

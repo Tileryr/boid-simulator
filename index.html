@@ -9,7 +9,12 @@
 </head>
 <body>
     <canvas></canvas>
-
+    <div class="tabs">
+        <div class="tab">
+            <label for="boidNumber">Number of boids</label>
+            <input type="range" id="boidNumber" name="boidNumber" min="1" max="250" value="100" onchange="changeBoidNumber(this.value)">
+        </div>
+    </div>
     <script src="boid.js"></script>
     <script src='script.js'></script>
 </body>

@@ -1,26 +1,56 @@
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
-let boidNumber = 10
+let boidNumber = 300
 let boidRadius = 10
 let boids = []
 
-let boidSeperationRadius = 40
-let boidAvoidanceFactor = 0.01
+// let boidSeperationRadius = 20
+// let boidAvoidanceFactor = 0.01
 
-let boidSightRadius = 80
-let matchingFactor = 0.01
-let centeringFactor = 0.00005
+// let boidSightRadius = 100
+// let matchingFactor = 0.02
+// let centeringFactor = 0.0001
 
-let margin = 50
+let margin = 100
 let leftMargin = margin
 let topMargin = margin
 let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
-let turnFactor = 0.2
+// let turnFactor = 0.15
 
-let boidMinSpeed = 4
-let boidMaxSpeed = 6
+// let boidMinSpeed = 4
+// let boidMaxSpeed = 6
+
+let tunableVariables = {
+    boidSeperationRadius: 20,
+    boidSightRadius: 100,
+    boidAvoidanceFactor: 0.01,
+    matchingFactor: 0.03,
+    centeringFactor: 0.0002,
+    turnFactor: 0.15,
+    boidMinSpeed: 4,
+    boidMaxSpeed: 6
+}
+
+function makeTriangle(position, radius, rotation = 0) {
+    // console.log(rotation)
+    let number = (rotation/Math.PI)*3
+    let newTriangle = {
+        //the first vertex is on the circumscribed circle at 0 radians where R is the radius of the circle ( R)
+        //you may decide to change this.
+        x1: position.x + radius * Math.cos(number*Math.PI/3),
+        y1: position.y + radius * Math.sin(number*Math.PI/3),
+        //the second vertex is on the circumscribed circle at 2*Math.PI/3 radians 
+        //you may decide to change this.
+        x2: position.x + radius * Math.cos((number+2)*Math.PI/3),
+        y2: position.y + radius * Math.sin((number+2)*Math.PI/3),
+        //calculate the 3-rd vertex
+        x3: position.x + radius * Math.cos((number+4)*Math.PI/3),
+        y3: position.y + radius * Math.sin((number+4)*Math.PI/3)
+    };
+    return newTriangle
+}
 
 function isInCircle(radius, center, position) {
     return Math.hypot(center.x-position.x, center.y-position.y) < radius ? true : false
@@ -39,10 +69,10 @@ class Boid {
         ctx.strokeStyle = 'white'
         ctx.lineWidth = '3'
 
-        ctx.beginPath()
-        ctx.arc(this.position.x, this.position.y, boidSeperationRadius, 0, 2*Math.PI);
-        ctx.arc(this.position.x, this.position.y, boidSightRadius, 0, 2*Math.PI);
-        ctx.stroke()
+        // ctx.beginPath()
+        // ctx.arc(this.position.x, this.position.y, boidSeperationRadius, 0, 2*Math.PI);
+        // ctx.arc(this.position.x, this.position.y, boidSightRadius, 0, 2*Math.PI);
+        // ctx.stroke()
 
         this.angle = Math.atan2(this.velocity.y, this.velocity.x)
         // console.log(this.velocity.y/this.velocity.x)
@@ -76,7 +106,7 @@ class Boid {
         boids.forEach(boid => {
             if(boid === this) {return}
 
-            if(isInCircle(boidSightRadius, this.position, boid.position)) {
+            if(isInCircle(tunableVariables.boidSightRadius, this.position, boid.position)) {
                 boidVelocityAverageX += boid.velocity.x
                 boidVelocityAverageY += boid.velocity.y
 
@@ -86,15 +116,15 @@ class Boid {
                 boidsInSight += 1
             }
 
-            if(isInCircle(boidSeperationRadius, this.position, boid.position)) {
+            if(isInCircle(tunableVariables.boidSeperationRadius, this.position, boid.position)) {
                 boidDistancesX += this.position.x - boid.position.x
                 boidDistancesY += this.position.y - boid.position.y
             }
         });
 
         //SEPERATION
-        this.velocity.x += boidDistancesX*boidAvoidanceFactor
-        this.velocity.y += boidDistancesY*boidAvoidanceFactor
+        this.velocity.x += boidDistancesX*tunableVariables.boidAvoidanceFactor
+        this.velocity.y += boidDistancesY*tunableVariables.boidAvoidanceFactor
 
         //ALIGNMENT
         if(boidsInSight > 0) {
@@ -104,32 +134,32 @@ class Boid {
             boidPositionAverageX = boidPositionAverageX/boidsInSight
             boidPositionAverageY = boidPositionAverageY/boidsInSight
 
-            this.velocity.x += (boidVelocityAverageX - this.velocity.x)*matchingFactor
-            this.velocity.y += (boidVelocityAverageY - this.velocity.y)*matchingFactor
+            this.velocity.x += (boidVelocityAverageX - this.velocity.x)*tunableVariables.matchingFactor
+            this.velocity.y += (boidVelocityAverageY - this.velocity.y)*tunableVariables.matchingFactor
 
-            this.velocity.x += (boidPositionAverageX - this.position.x)*centeringFactor
-            this.velocity.y += (boidPositionAverageY - this.position.y)*centeringFactor
+            this.velocity.x += (boidPositionAverageX - this.position.x)*tunableVariables.centeringFactor
+            this.velocity.y += (boidPositionAverageY - this.position.y)*tunableVariables.centeringFactor
         }
     
         //EDGE AVOIDANCE
         if (this.position.x < leftMargin) {
-            this.velocity.x += turnFactor }
+            this.velocity.x += tunableVariables.turnFactor }
         if (this.position.x > rightMargin) {
-            this.velocity.x -= turnFactor }
+            this.velocity.x -= tunableVariables.turnFactor }
         if (this.position.y < topMargin) {
-            this.velocity.y += turnFactor}
+            this.velocity.y += tunableVariables.turnFactor }
         if (this.position.y > bottomMargin) {
-            this.velocity.y -= turnFactor }
+            this.velocity.y -= tunableVariables.turnFactor }
         
         //MIN AND MAX SPEEDS
         let boidSpeed = Math.hypot(this.velocity.x, this.velocity.y)
-        if(boidSpeed < boidMinSpeed) {
-            this.velocity.x = (this.velocity.x/boidSpeed)*boidMinSpeed
-            this.velocity.y = (this.velocity.y/boidSpeed)*boidMinSpeed
+        if(boidSpeed < tunableVariables.boidMinSpeed) {
+            this.velocity.x = (this.velocity.x/boidSpeed)*tunableVariables.boidMinSpeed
+            this.velocity.y = (this.velocity.y/boidSpeed)*tunableVariables.boidMinSpeed
         } 
-        if(boidSpeed > boidMaxSpeed) {
-            this.velocity.x = (this.velocity.x/boidSpeed)*boidMaxSpeed
-            this.velocity.y = (this.velocity.y/boidSpeed)*boidMaxSpeed
+        if(boidSpeed > tunableVariables.boidMaxSpeed) {
+            this.velocity.x = (this.velocity.x/boidSpeed)*tunableVariables.boidMaxSpeed
+            this.velocity.y = (this.velocity.y/boidSpeed)*tunableVariables.boidMaxSpeed
         } 
         //UPDATE
         this.position.x += this.velocity.x
