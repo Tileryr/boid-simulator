@@ -30,8 +30,7 @@ function resizeWindow() {
 }
 
 function updateVariable() {
-    tunableVariables[this.name] = this.value
-    console.log(tunableVariables[centeringFactor])
+    tunableVariables[this.name] = +this.value
 }
 
 function changeBoidAmount(amount) {
@@ -50,12 +49,13 @@ function changeBoidAmount(amount) {
         })
     }
 }
+
 window.onresize = debounce(() => resizeWindow())
 
 window.onload = () => {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
-    
+
     changeBoidAmount(boidNumber)
 
     rightMargin = canvas.width-margin

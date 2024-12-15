@@ -5,22 +5,11 @@ let boidNumber = 300
 let boidRadius = 10
 let boids = []
 
-// let boidSeperationRadius = 20
-// let boidAvoidanceFactor = 0.01
-
-// let boidSightRadius = 100
-// let matchingFactor = 0.02
-// let centeringFactor = 0.0001
-
 let margin = 100
 let leftMargin = margin
 let topMargin = margin
 let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
-// let turnFactor = 0.15
-
-// let boidMinSpeed = 4
-// let boidMaxSpeed = 6
 
 let tunableVariables = {
     boidSeperationRadius: 20,
@@ -28,7 +17,7 @@ let tunableVariables = {
     avoidanceFactor: 0.01,
     matchingFactor: 0.03,
     centeringFactor: 0.0002,
-    turnFactor: 0.15,
+    turnFactor: 1,
     boidMinSpeed: 4,
     boidMaxSpeed: 6
 }
