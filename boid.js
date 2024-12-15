@@ -6,18 +6,19 @@ let boidRadius = 10
 let boids = []
 
 let margin = 100
-let leftMargin = margin
+let leftMargin = margin + canvas.width*0.1
 let topMargin = margin
 let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
 
+console.log(leftMargin)
 let tunableVariables = {
     boidSeperationRadius: 20,
     boidSightRadius: 100,
     avoidanceFactor: 0.01,
     matchingFactor: 0.03,
     centeringFactor: 0.0002,
-    turnFactor: 1,
+    turnFactor: 0.15,
     boidMinSpeed: 4,
     boidMaxSpeed: 6
 }

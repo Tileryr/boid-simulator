@@ -11,12 +11,24 @@
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
 </head>
 <body>
-    <div class="tabs">
-        <div class="tab">
+    <div class="sidebar">
+        <header>
+            <span>Boid Simulator</span>
+            <a>Repo</a>
+            <a>What are boids?</a>
+        </header>    
+        <div class="tabs">
+            <p>Size</p>
+            <p>FACTOR</p>
+        </div>
+        
+    </div>
+    <div class="windows">
+        <div class="window">
             <label for="boidNumber">Number of boids</label>
             <input type="range" id="boidNumber" min="1" max="250" value="100" onchange="changeBoidAmount(this.value)">
         </div>
-        <div class="tab factors">
+        <div class="factors window">
             <label for="BSig">Boid sight-range</label>
             <input type="range" id="BSig" name="boidSightRadius" min="10" max="150" value="100">
             <label for="BSep">Boid seperation-range</label>
@@ -38,9 +50,7 @@
     <canvas></canvas>
     
     <!-- <header>
-        <span>Boid Simulator</span>
-        <a>Repo</a>
-        <a>What are boids?</a>
+        
     </header> -->
     
     <script src="boid.js"></script>

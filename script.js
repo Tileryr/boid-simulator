@@ -25,6 +25,7 @@ function debounce(func, timeout = 300) {
 function resizeWindow() {
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientHeight  
+    leftMargin = margin + canvas.width*0.1
     rightMargin = canvas.width-margin
     bottomMargin = canvas.height-margin
 }
@@ -53,13 +54,8 @@ function changeBoidAmount(amount) {
 window.onresize = debounce(() => resizeWindow())
 
 window.onload = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
+    resizeWindow()
     changeBoidAmount(boidNumber)
-
-    rightMargin = canvas.width-margin
-    bottomMargin = canvas.height-margin
     animate()
 }
 
