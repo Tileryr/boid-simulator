@@ -25,7 +25,7 @@ let bottomMargin = canvas.height-margin
 let tunableVariables = {
     boidSeperationRadius: 20,
     boidSightRadius: 100,
-    boidAvoidanceFactor: 0.01,
+    avoidanceFactor: 0.01,
     matchingFactor: 0.03,
     centeringFactor: 0.0002,
     turnFactor: 0.15,
@@ -127,10 +127,10 @@ class Boid {
         });
 
         //SEPERATION
-        this.velocity.x += boidDistancesX*tunableVariables.boidAvoidanceFactor
-        this.velocity.y += boidDistancesY*tunableVariables.boidAvoidanceFactor
+        this.velocity.x += boidDistancesX*tunableVariables.avoidanceFactor
+        this.velocity.y += boidDistancesY*tunableVariables.avoidanceFactor
 
-        //ALIGNMENT
+        //ALIGNMENT + COHESION
         if(boidsInSight > 0) {
             boidVelocityAverageX = boidVelocityAverageX/boidsInSight
             boidVelocityAverageY = boidVelocityAverageY/boidsInSight

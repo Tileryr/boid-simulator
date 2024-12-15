@@ -31,6 +31,7 @@ function resizeWindow() {
 
 function updateVariable() {
     tunableVariables[this.name] = this.value
+    console.log(tunableVariables[centeringFactor])
 }
 
 function changeBoidAmount(amount) {

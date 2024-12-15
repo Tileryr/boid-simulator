@@ -5,6 +5,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Boid Simulator</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
 </head>
 <body>
@@ -15,8 +18,22 @@
             <input type="range" id="boidNumber" min="1" max="250" value="100" onchange="changeBoidAmount(this.value)">
         </div>
         <div class="tab factors">
-            <label for="boidSight">Boid sight-range</label>
-            <input type="range" id="boidSight" name="boidSightRadius" min="10" max="150" value="100">
+            <label for="BSig">Boid sight-range</label>
+            <input type="range" id="BSig" name="boidSightRadius" min="10" max="150" value="100">
+            <label for="BSep">Boid seperation-range</label>
+            <input type="range" id="BSep" name="boidSeperationRadius" min="10" max="150" value="100">
+            <label for="BAvoid">Avoidance-factor</label>
+            <input type="range" id="BAvoid" name="avoidanceFactor" step="0.01" min="0.01" max="1" value="0.01">
+            <label for="BMatch">Align-factor</label>
+            <input type="range" id="BMatch" name="matchingFactor" step="0.01" min="0.01" max="1" value="0.03">
+            <label for="BCent">Cohesion-factor</label>
+            <input type="range" id="BCent" name="centeringFactor" step="0.0001" min="0.0001" max="0.01" value="0.0002">
+            <label for="BEdge">Edge turn</label>
+            <input type="range" id="BEdge" name="turnFactor" step="0.01" min="0.01" max="1" value="0.15">
+            <label for="Bmin">Mininum speed</label>
+            <input type="range" id="Bmin" name="boidMinSpeed" step="1" min="1" max="20" value="4">
+            <label for="Bmax">Maximum speed</label>
+            <input type="range" id="Bmax" name="boidMaxSpeed" step="1" min="1" max="20" value="6">
         </div>
     </div>
     <script src="boid.js"></script>
