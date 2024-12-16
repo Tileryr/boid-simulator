@@ -1,4 +1,4 @@
-html, body, header, p {
+html, body, header, p, h3 {
     margin: 0;
 }
 
@@ -6,6 +6,9 @@ html, body, header, p {
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px;
+}
 body {
     height: 100vh;
     font-family: Poppins, sans-serif;
@@ -22,10 +25,27 @@ canvas {
 }
 
 .sidebar {
+    display: grid;
+    grid-template-rows: 200px 1fr;
     background-color: rgba(0, 0, 0, 0.9);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
+
+header {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+    line-height: 30px;
+}
+
+.tabs {
+    text-align: center;
+}
+/* WINDOW */
 
 .windows {
     position: absolute;
@@ -34,8 +54,41 @@ canvas {
 
 .window {
     position: absolute;
-    
+    padding: 10px;
+    width: max-content;
     background-color: rgba(0, 0, 0, 0.1);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px white solid;
+    line-height: 32px;
+}
+
+.top_bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: column;
+    border-bottom: 1px rgba(255, 255, 255, 0.2) solid;
+}
+
+button {
+    font-family: Poppins, sans-serif;
+    font-weight: light;
+}
+
+.close {
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    color: white;
+    height: 1.5rem;
+    width: 1.5rem;
+    transition: all 0.2s;
+}
+
+.close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+h3 {
+    display: inline-block;
 }

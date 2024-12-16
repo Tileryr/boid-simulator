@@ -11,7 +11,6 @@ let topMargin = margin
 let rightMargin = canvas.width-margin
 let bottomMargin = canvas.height-margin
 
-console.log(leftMargin)
 let tunableVariables = {
     boidSeperationRadius: 20,
     boidSightRadius: 100,

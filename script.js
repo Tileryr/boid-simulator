@@ -1,5 +1,6 @@
 const factorDiv = document.querySelector('.factors')
 const factorInputs = factorDiv.querySelectorAll('input');
+const closeButtons = document.querySelectorAll('.close')
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -20,6 +21,34 @@ function debounce(func, timeout = 300) {
         clearTimeout(timer);
         timer = setTimeout(() => { func.apply(this, args); }, timeout);
     };
+}
+
+function dragInitialize(element) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.querySelector(".top_bar").onmousedown = dragStart;
+
+    function dragStart(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = dragRelease;
+        document.onmousemove = drag;
+    }
+
+    function drag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+
+    function dragRelease() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
 }
 
 function resizeWindow() {
@@ -57,6 +86,12 @@ window.onload = () => {
     resizeWindow()
     changeBoidAmount(boidNumber)
     animate()
+
+    document.querySelectorAll(".window").forEach(window => dragInitialize(window))
+    closeButtons.forEach(button => {
+        let parentWindow = button.parentElement.parentElement
+        button.onclick = function(){parentWindow.style.display="none"}
+    })
 }
 
 factorInputs.forEach(input => input.addEventListener('change', updateVariable));
