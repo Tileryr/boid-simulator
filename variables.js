@@ -2,10 +2,10 @@ function updateVariable() {
     tunableVariables[this.name] = +this.value
 }
 
-function updateColor(element) {
-    document.documentElement.style.setProperty(`--${element.name}`, element.value)
-    tunableColors[element.name] = element.value
-    console.log(tunableColors[element.name])
+function updateColor() {
+    document.documentElement.style.setProperty(`--${this.name}`, this.value)
+    tunableColors[this.name] = this.value
+    console.log(tunableColors[this.name])
 }
 
 function changeBoidAmount(amount) {

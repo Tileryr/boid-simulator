@@ -37,6 +37,7 @@ canvas {
     background-color: color-mix(in srgb, var(--background_color) 90%, transparent);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
+    box-shadow: 1px 0px 20px var(--foreground_color);
 }
 
 header {
@@ -115,6 +116,33 @@ a:link, a:visited, a:hover, a:active {
 button {
     font-family: Poppins, sans-serif;
     font-weight: light;
+}
+
+/* SLIDER */
+input[type=range] {
+    appearance: none;
+    background-color: transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    border-radius: 1em;
+    background-color: var(--foreground_color);
+    height: 0.875rem;
+    width: 0.875rem;
+    margin-top: -0.25rem;
+    border: none;
+    box-shadow: 0 0 2px var(--background_color);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    border-radius: 1em;
+    height: 0.5rem;
+    background: var(--background_color);
+    border: 1px solid var(--foreground_color);
 }
 
 .close {

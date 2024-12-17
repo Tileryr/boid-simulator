@@ -79,4 +79,12 @@ window.onload = () => {
     })
 }
 
-variableInputs.forEach(input => input.addEventListener('change', updateVariable));
+variableInputs.forEach(input => {
+    input.addEventListener('change', updateVariable);
+    input.addEventListener('input', updateVariable);
+});
+
+document.querySelectorAll('input[type="color"]').forEach(input => {
+    input.addEventListener('change', updateColor);
+    input.addEventListener('input', updateColor);
+})
