@@ -1,5 +1,4 @@
-const factorDiv = document.querySelector('.factors')
-const factorInputs = factorDiv.querySelectorAll('input');
+const variableInputs = document.querySelectorAll('.variable');
 const closeButtons = document.querySelectorAll('.close')
 
 function animate() {
@@ -63,23 +62,6 @@ function updateVariable() {
     tunableVariables[this.name] = +this.value
 }
 
-function changeBoidAmount(amount) {
-    boidNumber = amount
-    boids = boids.slice(0, amount)
-    for (let index = boids.length; index <= amount; index++) {
-        boids[index] = new Boid({
-            position: {
-                x: Math.random()*canvas.width,
-                y: Math.random()*canvas.height
-            },
-            velocity: {
-                x: Math.random()*10-5,
-                y: Math.random()*10-5
-            }
-        })
-    }
-}
-
 window.onresize = debounce(() => resizeWindow())
 
 window.onload = () => {
@@ -94,4 +76,4 @@ window.onload = () => {
     })
 }
 
-factorInputs.forEach(input => input.addEventListener('change', updateVariable));
+variableInputs.forEach(input => input.addEventListener('change', updateVariable));

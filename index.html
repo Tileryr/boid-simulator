@@ -14,8 +14,8 @@
     <div class="sidebar">
         <header>
             <h1 class="title">Boid Simulator</h1>
-            <a href="https://github.com/Tileryr/boid-simulator" target="_blank">Repo</a>
-            <a href="https://en.wikipedia.org/wiki/Boids" target="_blank">?</a>
+            <a rel="noopener" href="https://github.com/Tileryr/boid-simulator" target="_blank">Repo</a>
+            <a rel="noopener" href="https://en.wikipedia.org/wiki/Boids" target="_blank">?</a>
         </header>    
         <div class="tabs">
             <p>Size</p>
@@ -25,9 +25,21 @@
     </div>
     <div class="windows">
         <!-- <div class="window">
+            <div class="top_bar">
+                <h3>SIZE</h3>
+                <button type="button" class="close">X</button>
+            </div>
+            <label for="boidNumber"></label>
+            <input type="range" id="boidNumber" min="1" max="250" value="100" onchange="">
+        </div> -->
+        <div class="window">
+            <div class="top_bar">
+                <h3>SIZE</h3>
+                <button type="button" class="close">X</button>
+            </div>
             <label for="boidNumber">Number of boids</label>
             <input type="range" id="boidNumber" min="1" max="250" value="100" onchange="changeBoidAmount(this.value)">
-        </div> -->
+        </div>
         <div class="factors window">
             <div class="top_bar">
                 <h3>FACTORS</h3>
@@ -35,38 +47,43 @@
             </div>
             <div>
                 <label for="BSig">Boid sight-range</label>
-                <input type="range" id="BSig" name="boidSightRadius" min="10" max="150" value="100">
+                <input class="variable" type="range" id="BSig" name="boidSightRadius" min="10" max="150" value="100">
                 <br>
                 <label for="BSep">Boid seperation-range</label>
-                <input type="range" id="BSep" name="boidSeperationRadius" min="10" max="150" value="100">
+                <input class="variable" type="range" id="BSep" name="boidSeperationRadius" min="10" max="150" value="100">
                 <br>
                 <label for="BAvoid">Avoidance-factor</label>
-                <input type="range" id="BAvoid" name="avoidanceFactor" step="0.01" min="0.01" max="1" value="0.01">
+                <input class="variable" type="range" id="BAvoid" name="avoidanceFactor" step="0.01" min="0.01" max="1" value="0.01">
                 <br>
                 <label for="BMatch">Align-factor</label>
-                <input type="range" id="BMatch" name="matchingFactor" step="0.01" min="0.01" max="1" value="0.03">
+                <input class="variable" type="range" id="BMatch" name="matchingFactor" step="0.01" min="0.01" max="1" value="0.03">
                 <br>
                 <label for="BCent">Cohesion-factor</label>
-                <input type="range" id="BCent" name="centeringFactor" step="0.0001" min="0.0001" max="0.01" value="0.0002">
+                <input class="variable" type="range" id="BCent" name="centeringFactor" step="0.0001" min="0.0001" max="0.01" value="0.0002">
                 <br>
                 <label for="BEdge">Edge turn</label>
-                <input type="range" id="BEdge" name="turnFactor" step="0.01" min="0.01" max="1" value="0.15">
+                <input class="variable" type="range" id="BEdge" name="turnFactor" step="0.01" min="0.01" max="1" value="0.15">
                 <br>
                 <label for="Bmin">Mininum speed</label>
-                <input type="range" id="Bmin" name="boidMinSpeed" step="1" min="1" max="20" value="4">
+                <input class="variable" type="range" id="Bmin" name="boidMinSpeed" step="1" min="1" max="20" value="4">
                 <br>
                 <label for="Bmax">Maximum speed</label>
-                <input type="range" id="Bmax" name="boidMaxSpeed" step="1" min="1" max="20" value="6">
+                <input class="variable" type="range" id="Bmax" name="boidMaxSpeed" step="1" min="1" max="20" value="6">
             </div>
+        </div>
+        <div class="window">
+            <div class="top_bar">
+                <h3>COLOR</h3>
+                <button type="button" class="close">X</button>
+            </div>
+            <label for="backcolor">Background Color</label>
+            <input type="color" id="backcolor" value="#000000" onchange="updateColor(this.value)">
         </div>
     </div>
     <canvas></canvas>
-    
-    <!-- <header>
-        
-    </header> -->
-    
+
     <script src="boid.js"></script>
+    <script src="variables.js"></script>
     <script src='script.js'></script>
 </body>
 </html>
