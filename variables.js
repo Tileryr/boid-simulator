@@ -1,7 +1,11 @@
-const overlay = document.querySelector(".overlay")
+function updateVariable() {
+    tunableVariables[this.name] = +this.value
+}
 
-function updateColor(color) {
-    overlay.style.backgroundColor = color
+function updateColor(element) {
+    document.documentElement.style.setProperty(`--${element.name}`, element.value)
+    tunableColors[element.name] = element.value
+    console.log(tunableColors[element.name])
 }
 
 function changeBoidAmount(amount) {

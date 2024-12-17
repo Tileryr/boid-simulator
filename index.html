@@ -77,7 +77,10 @@
                 <button type="button" class="close">X</button>
             </div>
             <label for="backcolor">Background Color</label>
-            <input type="color" id="backcolor" value="#000000" onchange="updateColor(this.value)">
+            <input type="color" id="backcolor" name="background_color" value="#000000" onchange="updateColor(this)">
+            <br>
+            <label for="forecolor">Background Color</label>
+            <input type="color" id="forecolor" name="foreground_color" value="#FFFFFF" onchange="updateColor(this)">
         </div>
     </div>
     <canvas></canvas>

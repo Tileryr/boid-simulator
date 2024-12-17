@@ -3,7 +3,7 @@ const closeButtons = document.querySelectorAll('.close')
 
 function animate() {
     window.requestAnimationFrame(animate)
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = tunableColors.background_color
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     boids.forEach(boid => {
@@ -56,10 +56,6 @@ function resizeWindow() {
     leftMargin = margin + canvas.width*0.1
     rightMargin = canvas.width-margin
     bottomMargin = canvas.height-margin
-}
-
-function updateVariable() {
-    tunableVariables[this.name] = +this.value
 }
 
 window.onresize = debounce(() => resizeWindow())

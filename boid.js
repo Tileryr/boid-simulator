@@ -22,6 +22,11 @@ let tunableVariables = {
     boidMaxSpeed: 6
 }
 
+let tunableColors = {
+    background_color: '#000000',
+    foreground_color: '#FFFFFF'
+}
+
 function makeTriangle(position, radius, rotation = 0) {
     // console.log(rotation)
     let number = (rotation/Math.PI)*3
@@ -55,7 +60,7 @@ class Boid {
     }
 
     draw() {
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'
+        ctx.strokeStyle = tunableColors.foreground_color + '33'
         ctx.lineWidth = '1'
 
         ctx.beginPath()
@@ -71,7 +76,7 @@ class Boid {
         
         var triangle = makeTriangle(this.position, boidRadius, this.angle)
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
+        ctx.strokeStyle = tunableColors.foreground_color
         ctx.lineWidth = '3'
         ctx.beginPath();
         ctx.moveTo(triangle.x1, triangle.y1);
