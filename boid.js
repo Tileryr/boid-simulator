@@ -2,7 +2,6 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
 let boidNumber = 300
-let boidRadius = 10
 let boids = []
 
 let margin = 100
@@ -19,7 +18,8 @@ let tunableVariables = {
     centeringFactor: 0.0002,
     turnFactor: 0.15,
     boidMinSpeed: 4,
-    boidMaxSpeed: 6
+    boidMaxSpeed: 6,
+    boidRadius: 10
 }
 
 let tunableColors = {
@@ -74,7 +74,7 @@ class Boid {
         // console.log(this.velocity.y/this.velocity.x)
         if (this.angle < 0) {this.angle+=Math.PI*2}
         
-        var triangle = makeTriangle(this.position, boidRadius, this.angle)
+        var triangle = makeTriangle(this.position, tunableVariables.boidRadius, this.angle)
 
         ctx.strokeStyle = tunableColors.foreground_color
         ctx.lineWidth = '3'

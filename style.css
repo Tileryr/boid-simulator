@@ -95,6 +95,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .window {
+    display: none;
     position: absolute;
     padding: 10px;
     width: max-content;
