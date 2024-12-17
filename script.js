@@ -1,6 +1,9 @@
 const variableInputs = document.querySelectorAll('.variable');
 const closeButtons = document.querySelectorAll('.close')
 
+const windows = document.querySelector('.windows')
+const tabs = Array.from(document.querySelector('.tabs').children)
+
 function animate() {
     window.requestAnimationFrame(animate)
     ctx.fillStyle = tunableColors.background_color
@@ -69,6 +72,10 @@ window.onload = () => {
     closeButtons.forEach(button => {
         let parentWindow = button.parentElement.parentElement
         button.onclick = function(){parentWindow.style.display="none"}
+    })
+    tabs.forEach(tab => {
+        let pairWindow = windows.querySelector(`.${tab.className}`)
+        tab.onclick = function(){pairWindow.style.display="block"}
     })
 }
 

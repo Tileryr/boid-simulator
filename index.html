@@ -18,8 +18,9 @@
             <a rel="noopener" href="https://en.wikipedia.org/wiki/Boids" target="_blank">?</a>
         </header>    
         <div class="tabs">
-            <p>Size</p>
-            <p>Factors</p>
+            <button class="size">Size</button>
+            <button class="factors">Factors</button>
+            <button class="color">Color</button>
         </div>
         
     </div>
@@ -32,7 +33,7 @@
             <label for="boidNumber"></label>
             <input type="range" id="boidNumber" min="1" max="250" value="100" onchange="">
         </div> -->
-        <div class="window">
+        <div class="size window">
             <div class="top_bar">
                 <h3>SIZE</h3>
                 <button type="button" class="close">X</button>
@@ -71,7 +72,7 @@
                 <input class="variable" type="range" id="Bmax" name="boidMaxSpeed" step="1" min="1" max="20" value="6">
             </div>
         </div>
-        <div class="window">
+        <div class="color window">
             <div class="top_bar">
                 <h3>COLOR</h3>
                 <button type="button" class="close">X</button>
