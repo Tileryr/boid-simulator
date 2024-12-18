@@ -1,8 +1,9 @@
 ## About The Project
-Simple boid simulator with customizable parameters such as  
+Simple boid simulator with customizable parameters such as:  
 * Amount/Size.
 * Factors affecting how extreme their motion is.
 * Behaviour
+  
 If you dont know what boids are: [Wikipedia](https://en.wikipedia.org/wiki/Boids).
 
 ![IMAGE](https://cloud-33rur3uxt-hack-club-bot.vercel.app/0screenshot_2024-12-18_140457.png)
