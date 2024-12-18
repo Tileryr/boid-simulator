@@ -8,6 +8,10 @@ function updateColor() {
     console.log(tunableColors[this.name])
 }
 
+function updateBehaviour() {
+    behaviour[this.name] = this.value
+}
+
 function changeBoidAmount(amount) {
     boidNumber = amount
     boids = boids.slice(0, amount)

@@ -22,6 +22,7 @@
             <button class="size">Size</button>
             <button class="factors">Factors</button>
             <button class="color">Color</button>
+            <button class="behaviour">Behaviour</button>
         </div>
         
     </div>
@@ -84,6 +85,21 @@
             <br>
             <label for="forecolor">Foreground Color</label>
             <input type="color" id="forecolor" name="foreground_color" value="#FFFFFF">
+        </div>
+        <div class="behaviour window">
+            <div class="top_bar">
+                <h3>BEHAVIOUR</h3>
+                <button type="button" class="close">X</button>
+            </div>
+            <label for="BAv">Seperate</label>
+            <input class="variable" type="checkbox" name="seperate" id="BAv" checked>
+            <br>
+            <label for="boidNumber">Align</label>
+            <input class="variable" type="checkbox" name="align" id="boidNumber" checked>
+            <br>
+            <label for="BCoh">Cohesion</label>
+            <input class="variable" type="checkbox" name="cohesion" id="BCoh" checked>
+
         </div>
     </div>
     <canvas></canvas>

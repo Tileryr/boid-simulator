@@ -19,13 +19,17 @@ let tunableVariables = {
     turnFactor: 0.15,
     boidMinSpeed: 4,
     boidMaxSpeed: 6,
-    boidRadius: 10
+    boidRadius: 10,
+    seperate: true,
+    align: true,
+    cohesion: true
 }
 
 let tunableColors = {
     background_color: '#000000',
     foreground_color: '#FFFFFF'
 }
+
 
 function makeTriangle(position, radius, rotation = 0) {
     // console.log(rotation)
@@ -121,9 +125,12 @@ class Boid {
         });
 
         //SEPERATION
-        this.velocity.x += boidDistancesX*tunableVariables.avoidanceFactor
-        this.velocity.y += boidDistancesY*tunableVariables.avoidanceFactor
-
+        if (tunableVariables.seperate) {
+            console.log(tunableVariables.seperate)
+            this.velocity.x += boidDistancesX*tunableVariables.avoidanceFactor
+            this.velocity.y += boidDistancesY*tunableVariables.avoidanceFactor
+        }
+        
         //ALIGNMENT + COHESION
         if(boidsInSight > 0) {
             boidVelocityAverageX = boidVelocityAverageX/boidsInSight
@@ -132,11 +139,15 @@ class Boid {
             boidPositionAverageX = boidPositionAverageX/boidsInSight
             boidPositionAverageY = boidPositionAverageY/boidsInSight
 
-            this.velocity.x += (boidVelocityAverageX - this.velocity.x)*tunableVariables.matchingFactor
-            this.velocity.y += (boidVelocityAverageY - this.velocity.y)*tunableVariables.matchingFactor
-
-            this.velocity.x += (boidPositionAverageX - this.position.x)*tunableVariables.centeringFactor
-            this.velocity.y += (boidPositionAverageY - this.position.y)*tunableVariables.centeringFactor
+            if(tunableVariables.align) {
+                this.velocity.x += (boidVelocityAverageX - this.velocity.x)*tunableVariables.matchingFactor
+                this.velocity.y += (boidVelocityAverageY - this.velocity.y)*tunableVariables.matchingFactor
+            }
+            
+            if(tunableVariables.cohesion) {
+                this.velocity.x += (boidPositionAverageX - this.position.x)*tunableVariables.centeringFactor
+                this.velocity.y += (boidPositionAverageY - this.position.y)*tunableVariables.centeringFactor
+            }
         }
     
         //EDGE AVOIDANCE
