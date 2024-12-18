@@ -19,10 +19,7 @@ let tunableVariables = {
     turnFactor: 0.15,
     boidMinSpeed: 4,
     boidMaxSpeed: 6,
-    boidRadius: 10,
-    seperate: true,
-    align: true,
-    cohesion: true
+    boidRadius: 10
 }
 
 let tunableColors = {
@@ -30,6 +27,11 @@ let tunableColors = {
     foreground_color: '#FFFFFF'
 }
 
+let behaviour = {
+    seperate: true,
+    align: true,
+    cohesion: true
+}
 
 function makeTriangle(position, radius, rotation = 0) {
     // console.log(rotation)
@@ -125,8 +127,7 @@ class Boid {
         });
 
         //SEPERATION
-        if (tunableVariables.seperate) {
-            console.log(tunableVariables.seperate)
+        if (behaviour.seperate) {
             this.velocity.x += boidDistancesX*tunableVariables.avoidanceFactor
             this.velocity.y += boidDistancesY*tunableVariables.avoidanceFactor
         }
@@ -139,12 +140,12 @@ class Boid {
             boidPositionAverageX = boidPositionAverageX/boidsInSight
             boidPositionAverageY = boidPositionAverageY/boidsInSight
 
-            if(tunableVariables.align) {
+            if(behaviour.align) {
                 this.velocity.x += (boidVelocityAverageX - this.velocity.x)*tunableVariables.matchingFactor
                 this.velocity.y += (boidVelocityAverageY - this.velocity.y)*tunableVariables.matchingFactor
             }
             
-            if(tunableVariables.cohesion) {
+            if(behaviour.cohesion) {
                 this.velocity.x += (boidPositionAverageX - this.position.x)*tunableVariables.centeringFactor
                 this.velocity.y += (boidPositionAverageY - this.position.y)*tunableVariables.centeringFactor
             }

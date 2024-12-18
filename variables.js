@@ -8,8 +8,10 @@ function updateColor() {
     console.log(tunableColors[this.name])
 }
 
-function updateBehaviour() {
-    behaviour[this.name] = this.value
+
+function updateBool() {
+    console.log(this.checked)
+    behaviour[this.name] = this.checked
 }
 
 function changeBoidAmount(amount) {

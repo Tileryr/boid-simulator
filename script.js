@@ -88,3 +88,8 @@ document.querySelectorAll('input[type="color"]').forEach(input => {
     input.addEventListener('change', updateColor);
     input.addEventListener('input', updateColor);
 })
+
+document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+    console.log("skibidi")
+    input.addEventListener('click', updateBool)
+})
